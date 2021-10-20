@@ -131,6 +131,12 @@ $(TARGET): build-netutil @LIBLINEAR_BUILD@ @PCAP_BUILD@ @LIBSSH2_BUILD@ @ZLIB_BU
 	rm -f $@
 	$(CXX) $(LDFLAGS) -o $@ $(OBJS) main.o $(LIBS)
 
+lib$(TARGET).a: build-netutil @LIBLINEAR_BUILD@ @PCAP_BUILD@ @LIBSSH2_BUILD@ @ZLIB_BUILD@ @PCRE_BUILD@ @NSOCK_BUILD@ @NBASE_BUILD@ @DNET_BUILD@ @LUA_BUILD@ \
+	$(OBJS) main.o
+	@echo Compiling libnmap
+	rm -f $@
+	ar rc $@ $(OBJS) main.o
+
 build-pcre: $(LIBPCREDIR)/Makefile
 	@echo Compiling libpcre; cd $(LIBPCREDIR) && $(MAKE)
 

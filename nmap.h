@@ -66,6 +66,10 @@
 #ifndef NMAP_H
 #define NMAP_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /************************INCLUDES**********************************/
 
 #ifdef HAVE_CONFIG_H
@@ -264,8 +268,14 @@
 /* Renamed main so that interactive mode could preprocess when necessary */
 int nmap_main(int argc, char *argv[]);
 
+void set_program_name(const char *name);
+
 int nmap_fetchfile(char *filename_returned, int bufferlen, const char *file);
 int gather_logfile_resumption_state(char *fname, int *myargc, char ***myargv);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* NMAP_H */
 
